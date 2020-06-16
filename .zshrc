@@ -1,4 +1,16 @@
 export PATH="$HOME/.local/bin:$PATH"
+source $HOME/.poetry/env
+
+alias ls="ls -A --color=auto"
+alias rosclean="rm -r ./build ./install ./log"
+up () {
+	poetry self update
+	sudo echo
+	rosdep update
+	rosdep install --from /opt/ros/master/src --rosdistro=foxy --os=ubuntu:bionic -ry
+	sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove
+	sudo snap refresh
+}
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -6,12 +18,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
    export EDITOR='subl -w'
 fi
-
-alias ls="ls -A --color=auto"
-alias rosclean="rm -r ./build ./install ./log"
-alias up="sudo echo; rosdep update; rosdep install --from /opt/ros/master/src --rosdistro=foxy --os=ubuntu:bionic -ry; sudo apt update && sudo apt full-upgrade && sudo apt autoremove; snap refresh" 
-
-
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -22,7 +28,6 @@ UPDATE_ZSH_DAYS=1
 ENABLE_CORRECTION="true"
 # with spelling correction, assume dvorak kb
 setopt dvorak
-
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -45,6 +50,7 @@ fi
 
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+
 
 export DIRENV_LOG_FORMAT=
 eval "$(direnv hook zsh)"
