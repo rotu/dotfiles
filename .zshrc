@@ -1,43 +1,26 @@
-export PATH="$HOME/.local/bin:$PATH"
-source $HOME/.poetry/env
-
-alias ls="ls -A --color=auto"
-alias rosclean="rm -r ./build ./install ./log"
-up () {
-	poetry self update
-	sudo echo
-	rosdep update
-	rosdep install --from /opt/ros/master/src --rosdistro=foxy --os=ubuntu:bionic -ry
-	sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove
-	sudo snap refresh
-}
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nano'
-else
-   export EDITOR='subl -w'
-fi
-
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="agnoster"
+export ZSH="/Users/dan/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
 DISABLE_UPDATE_PROMPT=true 
 UPDATE_ZSH_DAYS=1
+
 ENABLE_CORRECTION="true"
 # with spelling correction, assume dvorak kb
 setopt dvorak
 
-# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 plugins=(git node)
 
 source $ZSH/oh-my-zsh.sh
@@ -51,6 +34,15 @@ fi
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='nano'
+else
+   export EDITOR='subl -w'
+fi
 
-export DIRENV_LOG_FORMAT=
-eval "$(direnv hook zsh)"
+export HOMEBREW_EDITOR=$EDITOR
+
+if (( $+commands[thefuck] )); then
+	eval $(thefuck --alias)
+fi
