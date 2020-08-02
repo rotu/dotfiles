@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/dan/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -38,14 +38,23 @@ autoload -U +X bashcompinit && bashcompinit
 if [[ -n $SSH_CONNECTION ]]; then
 	export EDITOR='nano'
 else
-	export EDITOR='subl -w'
+	export EDITOR='code -w'
 fi
 
 export HOMEBREW_EDITOR=$EDITOR
 
-if (( $+commands[thefuck] )); then
-	eval $(thefuck --alias)
+if (( $+commands[pyenv] ))
+then
+	eval "$(pyenv init -)"
 fi
-if (( $+commands[direnv] )); then
+if (( $+commands[thefuck] ))
+then
+	eval "$(thefuck --alias)"
+fi
+if (( $+commands[direnv] ))
+then
 	eval "$(direnv hook zsh)"
 fi
+
+alias np="python -i -c 'import numpy as np'"
+alias sympy="python -i -c 'import rlcompleter; from sympy import init_session; init_session()'"

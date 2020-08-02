@@ -1,10 +1,19 @@
 #! /usr/bin/env zsh
 
 export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/Library/Python/3.7/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"1
-export PATH="$HOME/bin:$PATH"
-source $HOME/.poetry/env
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"
+
+# if (( $+commands[brew] ))
+# then
+# 	export LDFLAGS="-L$(brew --prefix)/opt/zlib/lib $LDFLAGS"
+# 	export CPPFLAGS="-I$(brew --prefix)/opt/zlib/include $CPPFLAGS"
+#   export LDFLAGS="-L$(brew --prefix)/opt/bzip2/lib"
+#   export CPPFLAGS="-I$(brew --prefix)/opt/bzip2/include"
+#   export LDFLAGS="-L$(brew --prefix)/opt/readline/lib"
+#   export CPPFLAGS="-I$(brew --prefix)/opt/readline/include"
+#   export PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig"
+# fi
 
 up () {
 	sudo --validate
@@ -15,7 +24,7 @@ up () {
 		pip-review --auto
 	fi
 	if (( $+commands[brew] )); then
-		brew upgrade
+		brew upgrade --greedy
 	fi
 	if (( $+commands[rosdep] )); then
 		rosdep update
@@ -31,10 +40,3 @@ up () {
 		sudo snap refresh -ry
 	fi
 }
-
-alias py="python3"
-alias np="python3 -i -c 'import numpy as np'"
-alias sympy="python3 -i -c 'import rlcompleter; from sympy import init_session; init_session()'"
-
-alias pi="ssh pi@raspberrypi.local"
-alias ls="ls -A"
