@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
 DISABLE_UPDATE_PROMPT=true 
-UPDATE_ZSH_DAYS=1
+UPDATE_ZSH_DAYS=7
 
 ENABLE_CORRECTION="true"
 # with spelling correction, assume dvorak kb
