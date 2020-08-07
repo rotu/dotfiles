@@ -21,7 +21,7 @@ up () {
 		poetry self update
 	fi
 	if (( $+commands[pip-review] )); then
-		pip-review --auto --user
+		pip-review --user --auto
 	fi
 	if (( $+commands[brew] )); then
 		brew upgrade --greedy
