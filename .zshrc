@@ -55,6 +55,10 @@ if (( $+commands[direnv] ))
 then
 	eval "$(direnv hook zsh)"
 fi
+if (( $+commands[register-python-argcomplete ros2] ))
+then
+	eval "$(register-python-argcomplete ros2 colcon)"
+fi
 
 alias np="python -i -c 'import numpy as np'"
 alias sympy="python -i -c 'import rlcompleter; from sympy import init_session; init_session()'"
