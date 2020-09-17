@@ -10,7 +10,7 @@ up () {
 		poetry self update
 	fi
 	if (( $+commands[python3] )); then
-		python3 -m pip install --upgrade user setuptools wheel
+		python3 -m pip install --upgrade --user pip setuptools wheel
 		python3 -m pip install --upgrade --quiet --user --requirement =(python3 -m pip freeze --user --exclude-editable | sed 's/=.*//')
 	fi
 	if (( $+commands[brew] )); then
