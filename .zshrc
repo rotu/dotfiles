@@ -55,9 +55,14 @@ if (( $+commands[direnv] ))
 then
 	eval "$(direnv hook zsh)"
 fi
-if (( $+commands[register-python-argcomplete ros2] ))
+if (( $+commands[register-python-argcomplete] ))
 then
 	eval "$(register-python-argcomplete ros2 colcon)"
+fi
+
+if ((! $+commands[open]))
+then
+	alias open=xdg-open
 fi
 
 alias np="python -i -c 'import numpy as np'"
