@@ -29,4 +29,7 @@ up () {
 	if (( $+commands[snap] )); then
 		sudo snap refresh
 	fi
+	if (( $+commands[op] )); then
+		sudo op update
+	fi
 }
