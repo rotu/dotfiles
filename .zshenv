@@ -1,8 +1,15 @@
 #! /usr/bin/env zsh
 
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.poetry/bin:$PATH"
+path=(
+	/usr/local/bin
+	$HOME/.local/bin
+	$HOME/.cargo/bin
+	$HOME/.poetry/bin
+	/opt/swift/swift-5.3.2-RELEASE-ubuntu20.04/usr/bin
+	$path
+	)
+export PATH
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 up () {
 	sudo --validate
@@ -28,8 +35,5 @@ up () {
 	fi
 	if (( $+commands[snap] )); then
 		sudo snap refresh
-	fi
-	if (( $+commands[op] )); then
-		sudo op update
 	fi
 }
