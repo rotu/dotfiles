@@ -25,7 +25,6 @@ up () {
 	fi
 	if (( $+commands[rosdep] )); then
 		rosdep update
-		rosdep install --from /opt/ros/master/src -ry
 	fi
 	if (( $+commands[softwareupdate] )); then
 		softwareupdate -i -a
