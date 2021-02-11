@@ -5,7 +5,6 @@ path=(
 	$HOME/.local/bin
 	$HOME/.cargo/bin
 	$HOME/.poetry/bin
-	/opt/swift/swift-5.3.2-RELEASE-ubuntu20.04/usr/bin
 	$path
 	)
 export PATH
