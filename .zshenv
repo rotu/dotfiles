@@ -20,7 +20,7 @@ up () {
 		python3 -m pip install --upgrade --quiet --user --requirement =(python3 -m pip freeze --user --exclude-editable | sed 's/=.*//')
 	fi
 	if (( $+commands[brew] )); then
-		brew upgrade --greedy
+		brew upgrade --greedy && brew cleanup
 	fi
 	if (( $+commands[rosdep] )); then
 		rosdep update
