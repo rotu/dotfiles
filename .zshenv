@@ -1,10 +1,11 @@
 #! /usr/bin/env zsh
 
 path=(
-	/usr/local/bin
-	$HOME/.local/bin
-	$HOME/.cargo/bin
-	$HOME/.poetry/bin
+	/usr/local/bin	# Homebrew
+	/usr/local/sbin	# Homebrew
+	$HOME/.poetry/bin	# Poetry (python environment manager)
+	$HOME/.local/bin	# Python pip
+	$HOME/.cargo/bin	# Rust
 	$path
 	)
 export PATH
