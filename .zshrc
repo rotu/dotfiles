@@ -64,6 +64,3 @@ if ((! $+commands[open]))
 then
 	alias open=xdg-open
 fi
-
-alias np="python -i -c 'import numpy as np'"
-alias sympy="python -i -c 'import rlcompleter; from sympy import init_session; init_session()'"

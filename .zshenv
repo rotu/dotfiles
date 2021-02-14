@@ -9,6 +9,11 @@ path=(
 	$path
 	)
 export PATH
+
+alias python=python3
+alias np="python -i -c 'import numpy as np'"
+alias sympy="python -i -c 'import rlcompleter; from sympy import init_session; init_session()'"
+
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 up () {
