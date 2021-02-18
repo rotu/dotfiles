@@ -1,3 +1,16 @@
+# Due to how Mac OS handles the path, if we put this in .zshenv, it gets prefixed with the stuff from /usr/libexec/path_helper
+typeset -U path # force path to only have unique values
+path=(
+	/usr/local/bin	# Homebrew
+	/usr/local/sbin	# Homebrew
+	/usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
+	$HOME/.poetry/bin	# Poetry (python environment manager)
+	$HOME/.local/bin	# Python pip
+	$HOME/.cargo/bin	# Rust
+	$path
+	)
+export PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -59,7 +72,6 @@ if (( $+commands[register-python-argcomplete] ))
 then
 	eval "$(register-python-argcomplete ros2 colcon)"
 fi
-
 if ((! $+commands[open]))
 then
 	alias open=xdg-open

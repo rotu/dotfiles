@@ -1,17 +1,3 @@
-#! /usr/bin/env zsh
-
-path=(
-	/usr/local/bin	# Homebrew
-	/usr/local/sbin	# Homebrew
-	/usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
-	$HOME/.poetry/bin	# Poetry (python environment manager)
-	$HOME/.local/bin	# Python pip
-	$HOME/.cargo/bin	# Rust
-	$path
-	)
-export PATH
-
-alias python=python3
 alias np="python -i -c 'import numpy as np'"
 alias sympy="python -i -c 'import rlcompleter; from sympy import init_session; init_session()'"
 
