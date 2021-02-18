@@ -3,6 +3,7 @@
 path=(
 	/usr/local/bin	# Homebrew
 	/usr/local/sbin	# Homebrew
+	/usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
 	$HOME/.poetry/bin	# Poetry (python environment manager)
 	$HOME/.local/bin	# Python pip
 	$HOME/.cargo/bin	# Rust
