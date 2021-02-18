@@ -11,6 +11,8 @@ path=(
 	)
 export PATH
 
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
