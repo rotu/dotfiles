@@ -26,8 +26,10 @@ DISABLE_UPDATE_PROMPT=true
 UPDATE_ZSH_DAYS=7
 
 ENABLE_CORRECTION="true"
+# just correct commands, not arguments
+unsetopt CORRECT_ALL
 # with spelling correction, assume dvorak kb
-setopt dvorak
+setopt DVORAK
 
 COMPLETION_WAITING_DOTS="true"
 
