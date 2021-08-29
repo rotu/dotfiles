@@ -1,3 +1,7 @@
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export HOMEBREW_CASK_OPTS="--no-quarantine"
+
+
 up () {
 	sudo --validate
 	if (( $+commands[poetry] )); then
@@ -17,12 +21,12 @@ up () {
 		rosdep update
 	fi
 	if (( $+commands[softwareupdate] )); then
-		softwareupdate -i -a
+		softwareupdate --all --install --force
 	fi
 	if (( $+commands[apt] )) && [[ "$OSTYPE" != "darwin"* ]]; then
 		sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove
 	fi
 	if (( $+commands[snap] )); then
-		sudo snap refresh
+		sudo snap refresh -ry
 	fi
 }

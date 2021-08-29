@@ -1,8 +1,15 @@
 # Due to how Mac OS handles the path, if we put this in .zshenv, it gets prefixed with the stuff from /usr/libexec/path_helper
 typeset -U path # force path to only have unique values
+
+python=/usr/local/opt/python@3 # $(brew --prefix python)
+llvm=/usr/local/opt/llvm # $(brew --prefix llvm)
+brew=/usr/local # $(brew --prefix)
+
 path=(
-	/usr/local/bin	# Homebrew
-	/usr/local/sbin	# Homebrew
+	$brew/bin	# Homebrew
+	$brew/sbin	# Homebrew
+	$llvm/bin
+	/usr/local/bin
 	/usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
 	$HOME/.poetry/bin	# Poetry (python environment manager)
 	$HOME/.local/bin	# Python pip
