@@ -6,7 +6,6 @@ path=(
 	/usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
 	$HOME/.poetry/bin	# Poetry (python environment manager)
 	$HOME/.local/bin	# Python pip
-	$HOME/.cargo/bin	# Rust
 	$path
 	)
 export PATH

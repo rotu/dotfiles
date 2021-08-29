@@ -5,10 +5,13 @@ up () {
 	fi
 	if (( $+commands[python3] )); then
 		python3 -m pip install --upgrade --user pip setuptools wheel
-		python3 -m pip install --upgrade --quiet --user --requirement =(python3 -m pip freeze --user --exclude-editable | sed 's/=.*//')
+	fi
+	if (( $+commands[pip-upgrade] )); then 
+		# pip install pip-upgrade-tool
+		pip-upgrade --novenv -y
 	fi
 	if (( $+commands[brew] )); then
-		brew upgrade --greedy && brew cleanup
+		brew upgrade --greedy && brew autoremove && brew cleanup
 	fi
 	if (( $+commands[rosdep] )); then
 		rosdep update
