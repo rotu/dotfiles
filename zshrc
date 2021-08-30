@@ -1,20 +1,18 @@
 # Due to how Mac OS handles the path, if we put this in .zshenv, it gets prefixed with the stuff from /usr/libexec/path_helper
 typeset -U path # force path to only have unique values
 
-python=/usr/local/opt/python@3 # $(brew --prefix python)
 llvm=/usr/local/opt/llvm # $(brew --prefix llvm)
-brew=/usr/local # $(brew --prefix)
+brew=/usr/local          # $(brew --prefix)
 
 path=(
-	$brew/bin	# Homebrew
-	$brew/sbin	# Homebrew
+	$brew/bin  # Homebrew
+	$brew/sbin # Homebrew
 	$llvm/bin
 	/usr/local/bin
-	/usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
-	$HOME/.poetry/bin	# Poetry (python environment manager)
-	$HOME/.local/bin	# Python pip
+	$HOME/.poetry/bin # Poetry (python environment manager)
+	$HOME/.local/bin  # Python pip
 	$path
-	)
+)
 export PATH
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -28,7 +26,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-DISABLE_UPDATE_PROMPT=true 
+DISABLE_UPDATE_PROMPT=true
 UPDATE_ZSH_DAYS=7
 
 ENABLE_CORRECTION="true"
@@ -66,23 +64,18 @@ fi
 
 export HOMEBREW_EDITOR=$EDITOR
 
-if (( $+commands[pyenv] ))
-then
+if (($ + commands[pyenv])); then
 	eval "$(pyenv init -)"
 fi
-if (( $+commands[thefuck] ))
-then
+if (($ + commands[thefuck])); then
 	eval "$(thefuck --alias)"
 fi
-if (( $+commands[direnv] ))
-then
+if (($ + commands[direnv])); then
 	eval "$(direnv hook zsh)"
 fi
-if (( $+commands[register-python-argcomplete] ))
-then
+if (($ + commands[register - python - argcomplete])); then
 	eval "$(register-python-argcomplete ros2 colcon)"
 fi
-if ((! $+commands[open]))
-then
+if ((!$ + commands[open])); then
 	alias open=xdg-open
 fi
