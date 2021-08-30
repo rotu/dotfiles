@@ -1,16 +1,23 @@
+#!/bin/zsh
+
 # Due to how Mac OS handles the path, if we put this in .zshenv, it gets prefixed with the stuff from /usr/libexec/path_helper
 typeset -U path # force path to only have unique values
 
-llvm=/usr/local/opt/llvm # $(brew --prefix llvm)
-brew=/usr/local          # $(brew --prefix)
+python=/usr/local/opt/python@3 # $(brew --prefix python)
+llvm=/usr/local/opt/llvm       # $(brew --prefix llvm)
+brew1=/usr/local               # $(brew --prefix)
+brew2=/opt/homebrew            # $(brew --prefix)
 
 path=(
-	$brew/bin  # Homebrew
-	$brew/sbin # Homebrew
+	$brew1/bin  # Homebrew
+	$brew1/sbin # Homebrew
+	$brew2/bin
+	$brew2/sbin
 	$llvm/bin
 	/usr/local/bin
-	$HOME/.poetry/bin # Poetry (python environment manager)
-	$HOME/.local/bin  # Python pip
+	/usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
+	$HOME/.poetry/bin                  # Poetry (python environment manager)
+	$HOME/.local/bin                   # Python pip
 	$path
 )
 export PATH
@@ -64,18 +71,18 @@ fi
 
 export HOMEBREW_EDITOR=$EDITOR
 
-if (($ + commands[pyenv])); then
+if (($+commands[pyenv])); then
 	eval "$(pyenv init -)"
 fi
-if (($ + commands[thefuck])); then
+if (($+zscommands[thefuck])); then
 	eval "$(thefuck --alias)"
 fi
-if (($ + commands[direnv])); then
+if (($+commands[direnv])); then
 	eval "$(direnv hook zsh)"
 fi
-if (($ + commands[register - python - argcomplete])); then
+if (($+commands[register-python-argcomplete])); then
 	eval "$(register-python-argcomplete ros2 colcon)"
 fi
-if ((!$ + commands[open])); then
+if ((!$+commands[open])); then
 	alias open=xdg-open
 fi
