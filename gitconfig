@@ -1,0 +1,14 @@
+[user]
+	email = DanOfTheRoses@gmail.com
+	name = Dan
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
+[core]
+	excludesfile = /Users/dan/.gitignore
+[alias]
+	cl = clone --depth 1 --recurse-submodules --remote-submodules

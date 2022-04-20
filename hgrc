@@ -1,0 +1,11 @@
+[ui]
+username = Dan Rose <dan@digilabs.io>
+merge = meld
+diff = meld
+ignore = ~/.hgignore
+
+[merge-tools]
+meld.priority = 1
+
+[tortoisehg]
+vdiff = meld

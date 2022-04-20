@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+if [[ $TERM = xterm-kitty ]]
+then
+	alias ssh="kitty +kitten ssh"
+fi
+export CMAKE_GENERATOR=Ninja
+export CMAKE_EXPORT_COMPILE_COMMANDS=On
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 
@@ -16,7 +22,10 @@ up() {
 		pip-upgrade --novenv -y
 	fi
 	if (($+commands[brew])); then
-		brew upgrade --greedy && brew autoremove && brew cleanup
+		brew upgrade --greedy && brew autoremove && brew cleanup --prune=1 
+	fi
+	if (($+commands[deno])); then
+		deno upgrade
 	fi
 	if (($+commands[rosdep])); then
 		rosdep update
