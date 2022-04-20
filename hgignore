@@ -1,0 +1,27 @@
+syntax: glob
+
+# Node
+npm-debug.log
+node_modules/
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# CMake
+cmake-build-*/
+
+# JetBrains IDE
+.idea/
+
+# vi
+*~
+
+# General
+logs/
+log/
+*.log
+tmp/
+temp/

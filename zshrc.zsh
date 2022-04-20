@@ -1,26 +1,31 @@
 #!/bin/zsh
 
 # Due to how Mac OS handles the path, if we put this in .zshenv, it gets prefixed with the stuff from /usr/libexec/path_helper
-typeset -U path # force path to only have unique values
 
-python=/usr/local/opt/python@3 # $(brew --prefix python)
 llvm=/usr/local/opt/llvm       # $(brew --prefix llvm)
-brew1=/usr/local               # $(brew --prefix)
-brew2=/opt/homebrew            # $(brew --prefix)
-
+brew=/opt/homebrew 				# $(brew --prefix)
 path=(
-	$brew1/bin  # Homebrew
-	$brew1/sbin # Homebrew
-	$brew2/bin
-	$brew2/sbin
+	$brew/bin
+	$brew/sbin
 	$llvm/bin
+	$HOME/.deno/bin
 	/usr/local/bin
-	/usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
-	$HOME/.poetry/bin                  # Poetry (python environment manager)
-	$HOME/.local/bin                   # Python pip
+	/usr/local/sbin # usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
+	$HOME/Library/Python/3.10/bin       # Poetry (python environment manager)
+	$HOME/.local/bin                   # Python pip\
 	$path
 )
+typeset -U path # force path to only have unique values
 export PATH
+
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias firefox="/Applications/Firefox.app/Contents/MacOS/firefox"
+alias edge="/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge"
+alias servo="/Applications/Servo.app/Contents/MacOS/servo"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
@@ -49,7 +54,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node)
+plugins=(git pyenv poetry)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,3 +91,5 @@ fi
 if ((!$+commands[open])); then
 	alias open=xdg-open
 fi
+
+export PATH="$HOME/.poetry/bin:$PATH"
