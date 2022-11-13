@@ -20,6 +20,9 @@ up() {
 		# pip install pip-upgrade-tool
 		pip-upgrade --novenv -y
 	fi
+	if (($+commands[pipx])); then
+		pipx upgrade-all
+	fi
 	if (($+commands[brew])); then
 		brew update && brew upgrade --greedy && brew autoremove && brew cleanup --prune=1 
 	fi
