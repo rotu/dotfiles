@@ -12,3 +12,7 @@
 	excludesfile = /Users/dan/.gitignore
 [alias]
 	cl = clone --depth 1 --recurse-submodules --remote-submodules
+[mergetool]
+	keepBackup = false
+[pull]
+	rebase = false

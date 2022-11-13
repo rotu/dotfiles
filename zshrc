@@ -2,17 +2,21 @@
 
 # Due to how Mac OS handles the path, if we put this in .zshenv, it gets prefixed with the stuff from /usr/libexec/path_helper
 
-llvm=/usr/local/opt/llvm       # $(brew --prefix llvm)
-brew=/opt/homebrew 				# $(brew --prefix)
+llvm=/usr/local/opt/llvm # $(brew --prefix llvm)
+brew=/opt/homebrew       # $(brew --prefix)
+pyroot=$($brew/bin/brew --prefix python@3.11)
 path=(
+	$pyroot/bin
+	$pyroot/libexec/bin
+	${HOME}/.cargo/bin
+	${HOME}/.nimble/bin
+	${HOME}/.local/bin              # Python pip
+	${HOME}/.deno/bin
+	$llvm/bin
 	$brew/bin
 	$brew/sbin
-	$llvm/bin
-	$HOME/.deno/bin
 	/usr/local/bin
-	/usr/local/sbin # usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
-	$HOME/Library/Python/3.10/bin       # Poetry (python environment manager)
-	$HOME/.local/bin                   # Python pip\
+	/usr/local/sbin               # usr/local/opt/python/libexec/bin/ # Python installed by Homebrew
 	$path
 )
 typeset -U path # force path to only have unique values
@@ -23,9 +27,11 @@ alias firefox="/Applications/Firefox.app/Contents/MacOS/firefox"
 alias edge="/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge"
 alias servo="/Applications/Servo.app/Contents/MacOS/servo"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
@@ -54,7 +60,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pyenv poetry)
+plugins=(git poetry)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -74,22 +80,31 @@ else
 	export EDITOR='code -w'
 fi
 
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_DEVELOPER=1
 export HOMEBREW_EDITOR=$EDITOR
+export HOMEBREW_EVAL_ALL=1
 
-if (($+commands[pyenv])); then
+
+if (( $+commands[pyenv] )); then
+	export PYENV_ROOT="$HOME/.pyenv"
+	export PATH="$PYENV_ROOT/bin:$PATH"
 	eval "$(pyenv init -)"
 fi
-if (($+zscommands[thefuck])); then
+if (( $+commands[thefuck] )); then
 	eval "$(thefuck --alias)"
 fi
-if (($+commands[direnv])); then
+if (( $+commands[direnv] )); then
 	eval "$(direnv hook zsh)"
 fi
-if (($+commands[register-python-argcomplete])); then
+if (( $+commands[register-python-argcomplete] )); then
 	eval "$(register-python-argcomplete ros2 colcon)"
 fi
-if ((!$+commands[open])); then
+if (( !$+commands[open] )); then
 	alias open=xdg-open
 fi
 
-export PATH="$HOME/.poetry/bin:$PATH"
+# pnpm
+export PNPM_HOME="/Users/dan/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end

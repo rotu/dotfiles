@@ -2,6 +2,7 @@
 
 if [[ $TERM = xterm-kitty ]]
 then
+	alias icat="kitty +kitten icat"
 	alias ssh="kitty +kitten ssh"
 fi
 export CMAKE_GENERATOR=Ninja
@@ -9,11 +10,9 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=On
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 
+
 up() {
 	sudo --validate
-	if (($+commands[poetry])); then
-		poetry self update
-	fi
 	if (($+commands[python3])); then
 		python3 -m pip install --upgrade --user pip setuptools wheel
 	fi
@@ -22,7 +21,7 @@ up() {
 		pip-upgrade --novenv -y
 	fi
 	if (($+commands[brew])); then
-		brew upgrade --greedy && brew autoremove && brew cleanup --prune=1 
+		brew update && brew upgrade --greedy && brew autoremove && brew cleanup --prune=1 
 	fi
 	if (($+commands[deno])); then
 		deno upgrade
@@ -40,3 +39,4 @@ up() {
 		sudo snap refresh -ry
 	fi
 }
+. "$HOME/.cargo/env"
