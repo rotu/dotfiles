@@ -10,7 +10,6 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=On
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 
-
 up() {
 	sudo --validate
 	if (($+commands[python3])); then
@@ -23,11 +22,33 @@ up() {
 	if (($+commands[pipx])); then
 		pipx upgrade-all
 	fi
-	if (($+commands[brew])); then
-		brew update && brew upgrade --greedy && brew autoremove && brew cleanup --prune=1 
+
+	# javascript stuff
+	if (($+commands[corepack])); then
+		corepack prepare --all
 	fi
+	if (($+commands[pnpm])); then
+      pnpm update --global
+  fi
+	if (($+commands[npm])); then
+      npm update --global
+  fi
+	if (($+commands[yarn])); then
+      yarn global upgrade
+  fi
 	if (($+commands[deno])); then
 		deno upgrade
+	fi
+
+	# rust stuff
+	if (($+commands[rustup])); then
+		rustup update
+		cargo install cargo-update
+		cargo update
+	fi
+
+	if (($+commands[brew])); then
+		brew update && brew upgrade --greedy && brew autoremove && brew cleanup --prune=1 
 	fi
 	if (($+commands[rosdep])); then
 		rosdep update
